@@ -12,7 +12,7 @@ So we create gross, with mechanism like below:
 3. The docker builds' output target bin can be discovered by gross. We use file watcher to detect folder changes, get the bin files, and notify the distributing process to handle the built firmware. 
 
 ### workflow overview
-![](docs/arch.png)
+![](doc/arch.png)
 
 ### container convention
 1. A build.sh/build.bat script MUST exist in path /root/build.sh, which reads a bunch of params from command line. Gross will spawn the script in container with configured params.
