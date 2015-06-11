@@ -1,4 +1,4 @@
-# gross  [![Build Status](https://drone.io/github.com/PandoCloud/gross/status.png)](https://drone.io/github.com/PandoCloud/gross/latest)
+# gross  [![Build Status](https://drone.io/github.com/PandoCloud/gross/status.png)](https://drone.io/github.com/PandoCloud/gross/latest) [![Circle CI](https://circleci.com/gh/PandoCloud/gross/tree/master.svg?style=svg)](https://circleci.com/gh/PandoCloud/gross/tree/master) [![Build Status](https://travis-ci.org/PandoCloud/gross.svg)](https://travis-ci.org/PandoCloud/gross)
 gross is an auto cross compiling framework, which uses docker to build firmwares.
 
 ### purpose
