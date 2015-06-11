@@ -1,4 +1,4 @@
-# gross
+# gross  [![Build Status](https://drone.io/github.com/PandoCloud/gross/status.png)](https://drone.io/github.com/PandoCloud/gross/latest)
 gross is an auto cross compiling framework, which uses docker to build firmwares.
 
 ### purpose
