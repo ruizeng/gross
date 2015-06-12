@@ -15,14 +15,14 @@ So we create gross, with mechanism like below:
 ![](doc/arch.png)
 
 ### container convention
-1. A build.sh/build.bat script MUST exist in path /root/build.sh, which reads a bunch of params from command line. Gross will spawn the script in container with configured params.
+1. A gross.sh/gross.bat script MUST exist in the root folder of project source code, which reads a bunch of params from command line. Gross will spawn the script in container with configured params.
 2. Make sure the build image has access right to the CVS repo source(You may need to configure a deploy key in the project source).
 3. The build container SHOULD expose a shared folder to the gross host. Gross will watch the folder for built target.
 4. Typical build script workflow is like below:
-	a. clone the repo from cvs
-	b. read params from command line
-	c. invoke a build command with params specified(eg. "make foo=xx bar=xx")
-	d. if build success, copy the target binary to shared folder
+	1. clone the repo from cvs
+	2. read params from command line
+	3. invoke a build command with params specified(eg. "make foo=xx bar=xx")
+	4. if build success, copy the target binary to shared folder
 	
 ### usage
 TODO

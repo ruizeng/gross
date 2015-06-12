@@ -1,5 +1,5 @@
 package gross
 
-//  TargetHandler is invoke by gross, to do some tasks to deliver the build firmware
+//  TargetHandler is invoked by gross to deliver the build firmware with some tasks.
 type TargetHandler interface {
 }

@@ -8,14 +8,24 @@ type Gross struct {
 	// watcher *Watcher    // fs watcher to watch target folder change
 }
 
-// create a new Gross with config
+// the Gross init config options
 // webhook : webhook to serve, ie. "gitlab", "github"
+// addr: the listening http service address
 // rule: the automatic building rule
 // folder: the watch folder where the build container put the target
 // handler: the handler to handle built targets
-func New(hookname string, rule BuildRuler, folder string, handler TargetHandler) (*Gross, error) {
+type Config struct {
+	HookName string
+	Addr     string
+	Rule     BuildRuler
+	Folder   string
+	Handler  TargetHandler
+}
+
+// create a new Gross with config
+func New(conf Config) (*Gross, error) {
 	// w := &Watcher{folder}
-	h, err := NewWebHook(hookname, nil)
+	h, err := NewWebHook(conf.HookName, conf.Addr, nil)
 	if err != nil {
 		return nil, err
 	}
