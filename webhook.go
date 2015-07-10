@@ -1,5 +1,10 @@
 package gross
 
+import (
+	"encoding/json"
+	"strings"
+)
+
 // CVSEvent is a general struct to describe a cvs event
 type CVSEvent struct {
 	name   string
@@ -16,7 +21,7 @@ type CVSHandler interface {
 	// repo: the repo name
 	// branch: the branch name
 	// extra: the tag desc string, usually looks like "xx.xx.xx"
-	HandleTag(repo string, branch string, tag string)
+	HandleTag(repo string, tag string)
 }
 
 type HTTPParser func(request string) (CVSEvent, error)
@@ -36,7 +41,26 @@ func NewWebHook(name string, addr string, handler CVSHandler) (*WebHook, error) 
 
 // gitlab http request parser
 func GitlabHTTPParser(request string) (CVSEvent, error) {
-	return CVSEvent{}, nil
+	var f interface{}
+	err := json.Unmarshal([]byte(request), &f)
+	if err != nil {
+		return CVSEvent{}, err
+	}
+	ev := CVSEvent{}
+	m := f.(map[string]interface{})
+	repository := m["repository"].(map[string]interface{})
+	ev.repo = repository["name"].(string)
+	ref := m["ref"].(string)
+	refs := strings.Split(ref, "/")
+	if strings.Contains(ref, "tag") {
+		ev.name = "tag"
+		ev.extra = refs[len(refs)-1]
+	} else {
+		ev.name = "push"
+		ev.branch = refs[len(refs)-1]
+	}
+
+	return ev, nil
 }
 
 // github http request parser
